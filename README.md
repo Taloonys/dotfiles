@@ -6,6 +6,7 @@
 * autocompletion
 * mason
 * good dotfiles managing
+* deploying *docker & wsl2* based environment
 ## how it works...
 * `init.lua` - starting point
   * `lua/` - all `requires '<...>'` search that `...` inside `lua/` dir
