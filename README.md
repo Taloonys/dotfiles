@@ -29,3 +29,10 @@ ln -s ~/dotfiles/.gitconfig ~/.gitconfig
 
 # gitconfig
 * change username, email and editor
+
+---
+
+# dev notes
+## Required
+* **brew** + install neovim from there
+* `brew install rust go unzip`
