@@ -1,16 +1,19 @@
-# After importing:
-* `ln -s <your-dotfiles-path>/nvim ~/.config/nvim`
-* `ln -s <your-dotfiles-path>/.gitconfig ~/.gitconfig`
-## quickstuff for default installation
+# Quickstart
 ```sh
 git clone https://github.com/Taloonys/better-dotfiles.git ~/dotfiles && cd ~/dotfiles
 ln -s ~/dotfiles/nvim ~/.config/nvim
 ln -s ~/dotfiles/.gitconfig ~/.gitconfig
 ```
+* .. and open nvim, it will install plugins
+
+---
 
 # nvim
 * currently in progress of switching to nvim as main IDE everywhere
 * also i used to write helpful stuff for me and random seekers... so you are welcome
+
+## Prb required
+* fzf
 
 ## todo
 * lsp
