@@ -24,4 +24,5 @@ ln -s ~/dotfiles/.gitconfig ~/.gitconfig
 * `config/` - for lazy nvim config (just `<C-c> + <C-v>` from docs) & concrete plugins configurations (`<C-..>` = Ctrl + ..)
 * `plugins/` - contains plugin imports via lazy (usually bare `<C-c> + <C-v>` from git pages under *Installation*.. their dependencies are inside this files)
 
-#gitconfig
+# gitconfig
+* change username, email and editor
