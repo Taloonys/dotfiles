@@ -1,10 +1,11 @@
 local lspconfig = require "lspconfig"
+local capabilities = require "blink.cmp".get_lsp_capabilities()
 
-lspconfig.lua_ls.setup({})
-lspconfig.rust_analyzer.setup({})
-lspconfig.clangd.setup({})
-lspconfig.gopls.setup({})
-lspconfig.pyright.setup({})
+lspconfig.lua_ls.setup({ capabilities = capabilities })
+lspconfig.rust_analyzer.setup({ capabilities = capabilities })
+lspconfig.clangd.setup({ capabilities = capabilities })
+lspconfig.gopls.setup({ capabilities = capabilities })
+lspconfig.pyright.setup({ capabilities = capabilities })
 
 vim.keymap.set('n', 'K', vim.lsp.buf.hover, {})
 vim.keymap.set('n', 'gd', vim.lsp.buf.declaration, {})
