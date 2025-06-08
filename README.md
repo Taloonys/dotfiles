@@ -16,9 +16,7 @@ ln -s ~/dotfiles/.gitconfig ~/.gitconfig
 * fzf
 
 ## todo
-* lsp
-* autocompletion
-* mason
+* config terminal
 * deploying *docker & wsl2* based environment
 
 ## how it works...

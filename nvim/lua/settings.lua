@@ -5,5 +5,8 @@ opt.number 			= true
 opt.relativenumber 	= true          
 
 -- tabulation
-opt.shiftwidth 	= 4
-opt.tabstop 	= 4
+opt.shiftwidth 	= 4					-- short tab
+opt.tabstop 	= 4					-- short tab
+opt.smartindent = true				-- new line auto tabbed
+opt.splitright  = true              -- vertical split вправо
+opt.splitbelow  = true              -- horizontal split вниз
