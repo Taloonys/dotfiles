@@ -4,6 +4,7 @@ git clone https://github.com/Taloonys/better-dotfiles.git ~/dotfiles && cd ~/dot
 ln -s ~/dotfiles/nvim ~/.config/nvim
 ln -s ~/dotfiles/.gitconfig ~/.gitconfig
 ```
+* check nvim requirements
 * .. and open nvim, it will install plugins
 
 ---
@@ -17,6 +18,11 @@ ln -s ~/dotfiles/.gitconfig ~/.gitconfig
 * `sudo brew install fzf rust go unzip lazygit`
 
 ## todo
+* understand / get used to:
+    * buffers
+    * tabs
+    * macros
+    * marks
 * deploying *docker & wsl2* based environment
 * wezterm config sync
 * better refactor
