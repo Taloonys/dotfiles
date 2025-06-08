@@ -13,11 +13,13 @@ ln -s ~/dotfiles/.gitconfig ~/.gitconfig
 * also i used to write helpful stuff for me and random seekers... so you are welcome
 
 ## Prb required
-* fzf
+* brew & install neovim 0.11+
+* `sudo brew install fzf rust go unzip lazygit`
 
 ## todo
-* config terminal
 * deploying *docker & wsl2* based environment
+* wezterm config sync
+* better refactor
 
 ## how it works...
 * `init.lua` - starting point
@@ -27,10 +29,3 @@ ln -s ~/dotfiles/.gitconfig ~/.gitconfig
 
 # gitconfig
 * change username, email and editor
-
----
-
-# dev notes
-## Required
-* **brew** + install neovim from there
-* `brew install rust go unzip`
