@@ -15,7 +15,7 @@ ln -s ~/dotfiles/.gitconfig ~/.gitconfig
 
 ## Prb required
 * brew & install neovim 0.11+
-* `sudo brew install fzf rust go unzip lazygit`
+* `brew install fzf rust go unzip lazygit`
 
 ## todo
 * understand / get used to:
