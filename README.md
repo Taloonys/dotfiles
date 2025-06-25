@@ -1,8 +1,8 @@
 # Quickstart
 ```sh
-git clone https://github.com/Taloonys/better-dotfiles.git ~/dotfiles && cd ~/dotfiles
-ln -s ~/dotfiles/nvim ~/.config/nvim
-ln -s ~/dotfiles/.gitconfig ~/.gitconfig
+git clone https://github.com/Taloonys/dotfiles.git ~/dotfiles && cd ~/dotfiles
+cmd /c mklink /d ~\AppData\local\nvim ~\dotfiles\nvim
+cmd /c mklink ~\.gitconfig ~\dotfiles\.gitconfig
 ```
 * check nvim requirements
 * .. and open nvim, it will install plugins
@@ -15,7 +15,7 @@ ln -s ~/dotfiles/.gitconfig ~/.gitconfig
 
 ## Prb required
 * brew & install neovim 0.11+
-* `brew install fzf rust go unzip lazygit`
+* tbh idk
 
 ## todo
 * understand / get used to:
