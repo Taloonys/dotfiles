@@ -1,5 +1,15 @@
 local map 	= vim.keymap.set
 
+--[[ Could be used
+function Map(mode, lhs, rhs, opts)
+    local options = { noremap = true, silent = true }      -- disable recursive mappings + no feedback about command completion
+    if opts then
+        options = vim.tbl_extend("force", options, opts)  -- rewrite options if presented
+    end
+    vim.keymap.set(mode, lhs, rhs, options)
+end
+--]]
+
 vim.g.mapleader = " "
 
 -- Defaults edit
@@ -37,3 +47,10 @@ vim.keymap.set("v", ">", ">gv")  -- drag 1 tab right (and don't lose selection!)
 vim.keymap.set("n", "<TAB>", ":bn<CR>")
 vim.keymap.set("n", "<S-TAB>", ":bp<CR>")
 vim.keymap.set("n", "<leader>bd", ":bd<CR>") 
+
+-- Basic stuff enchancements
+vim.keymap.set("n", "J", "mzJ`z")          -- concatenate lines, BUT keeps cursor position
+vim.keymap.set("n", "<C-d>", "<C-d>zz")    -- scroll down AND center cursor pos on screen
+vim.keymap.set("n", "<C-u>", "<C-u>zz")    -- scroll up AND center cursor pos on screen
+vim.keymap.set("n", "n", "nzzzv")          -- find next occurence AND center cursor + open fold
+vim.keymap.set("n", "N", "Nzzzv")          -- find previous occurence AND center cursor + open fold
