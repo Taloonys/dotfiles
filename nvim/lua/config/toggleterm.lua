@@ -3,6 +3,7 @@ require("toggleterm").setup({
 	-- Settings are applied only by wsl (for example) relaunching...
 	-- ]]
 	open_mapping = [[<c-\>]],
+	shell = "powershell",
 	autochdir = false,
 	direction = "float",
 	float_opts = {
