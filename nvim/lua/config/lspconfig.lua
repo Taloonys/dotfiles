@@ -5,6 +5,7 @@ lspconfig.lua_ls.setup({ capabilities = capabilities })
 lspconfig.rust_analyzer.setup({ capabilities = capabilities })
 lspconfig.clangd.setup({ capabilities = capabilities })
 lspconfig.marksman.setup({ capabilities = capabilities })
+lspconfig.lemminx.setup({ capabilities = capabilities })
 
 
 vim.api.nvim_create_autocmd('LspAttach', {
@@ -37,13 +38,13 @@ vim.api.nvim_create_autocmd('LspAttach', {
     bufmap('n', 'gs', '<cmd>lua vim.lsp.buf.signature_help()<cr>')
 
     -- Renames all references to the symbol under the cursor
-    bufmap('n', '<F2>', '<cmd>lua vim.lsp.buf.rename()<cr>')
+    bufmap('n', '<leader>vrn', '<cmd>lua vim.lsp.buf.rename()<cr>')
 
     -- Selects a code action available at the current cursor position
-    bufmap('n', '<F4>', '<cmd>lua vim.lsp.buf.code_action()<cr>')
+    bufmap('n', '<leader>vca', '<cmd>lua vim.lsp.buf.code_action()<cr>')
 
     -- Show diagnostics in a floating window
-    bufmap('n', 'gl', '<cmd>lua vim.diagnostic.open_float()<cr>')
+    bufmap('n', '<leader>vd', '<cmd>lua vim.diagnostic.open_float()<cr>')
 
     -- Move to the previous diagnostic
     bufmap('n', '[d', '<cmd>lua vim.diagnostic.goto_prev()<cr>')
