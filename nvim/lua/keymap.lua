@@ -8,18 +8,15 @@ function Map(mode, lhs, rhs, opts)
     vim.keymap.set(mode, lhs, rhs, options)
 end
 
--- File explorer
-Map('n', '<leader>pv', vim.cmd.Ex)
-
 -- System buffer
-Map({'n', 'v'}, '<leader>y', '"+y') -- selected
-Map({'n', 'v'}, '<leader>Y', '"+Y') -- whole line
+Map({'n', 'v'}, '<leader>sy', '"+y') -- selected
+Map({'n', 'v'}, '<leader>sY', '"+Y') -- whole line
 
-Map({'n', 'v'}, '<leader>d', '"+d') -- selected
-Map({'n', 'v'}, '<leader>D', '"+D') -- whole line
+Map({'n', 'v'}, '<leader>sd', '"+d') -- selected
+Map({'n', 'v'}, '<leader>sD', '"+D') -- whole line
 
-Map('n', '<leader>p', '"+p')  -- after cursor (Somehow it's slow*)
-Map('n', '<leader>P', '"+P')  -- before cursor
+Map('n', '<leader>sp', '"+p')  -- after cursor (Somehow it's slow*)
+Map('n', '<leader>sP', '"+P')  -- before cursor
 
 -- Split navigation
 Map("n", "<C-h>", "<C-w>h")
