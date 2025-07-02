@@ -3,6 +3,7 @@
 git clone https://github.com/Taloonys/dotfiles.git ~/dotfiles && cd ~/dotfiles
 ln -s ~/dotfiles/nvim ~/.config/nvim
 ln -s ~/dotfiles/.gitconfig ~/.gitconfig
+ln -s ~/dotfiles/.vimrc ~/.vimrc
 ```
 * check nvim requirements
 * .. and open nvim, it will install plugins
