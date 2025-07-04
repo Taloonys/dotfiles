@@ -6,7 +6,7 @@ return {
 	{
 	  "polirritmico/telescope-lazy-plugins.nvim",
 	  keys = {
-		{ "<leader>cp", "<Cmd>Telescope lazy_plugins<CR>", desc = "Telescope: Plugins configurations" },
+		{ "<leader>cp", "<Cmd>Telescope lazy_plugins<CR>", desc = "Telescope: Plugins" },
 	  },
 	},
 	},
