@@ -15,6 +15,8 @@ require("config.colors")
 require("config.toggleterm")
 require("config.harpoon")
 require("config.statusline")
+require("config.messages")
+require("config.file-explorer")
 
 -- I hope to refactor to:
 -- require "config.lsp"
