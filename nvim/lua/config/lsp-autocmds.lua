@@ -3,11 +3,21 @@ vim.api.nvim_create_autocmd('LspAttach', {
 	callback = function(args)
 		local client = assert(vim.lsp.get_client_by_id(args.data.client_id))
 
+		-- ╔═══════════════════════╗
+		-- ║    Auto-completion    ║
+		-- ╚═══════════════════════╝
 		if client:supports_method('textDocument/completion') then
-			vim.lsp.completion.enable(true, client.id, args.buf, { autotrigger = true })
+			-- show menu even for 1 option, don't select first option, open options in a bit different popup menu
+			vim.opt_local.completeopt = {'menuone', 'noselect', 'noinsert', 'popup'}
+			vim.lsp.completion.enable(true, client.id, args.buf, {
+				-- auto show options
+				autotrigger = true,
+			})
 		end
 
-		-- Auto-format ("lint") on save.
+		-- ╔════════════════════════════════════╗
+		-- ║    Auto-format ("lint") on save    ║
+		-- ╚════════════════════════════════════╝
 		if not client:supports_method('textDocument/willSaveWaitUntil')
 			and client:supports_method('textDocument/formatting') then
 			vim.api.nvim_create_autocmd('BufWritePre', {
@@ -20,7 +30,9 @@ vim.api.nvim_create_autocmd('LspAttach', {
 			})
 		end
 
-		-- keymaps
+		-- ╔══════════════╗
+		-- ║    Keymaps   ║
+		-- ╚══════════════╝
 		local map = function(keys, func, desc)
 			vim.keymap.set("n", keys, func, { buffer = args.buf, desc = "LSP: " .. desc })
 		end
@@ -33,6 +45,17 @@ vim.api.nvim_create_autocmd('LspAttach', {
 		map("<leader>lr", vim.lsp.buf.rename, "Rename all references")
 		map("<leader>lf", vim.lsp.buf.format, "Format")
 		map("<leader>v", "<cmd>vsplit | lua vim.lsp.buf.definition()<cr>", "Goto Definition in Vertical Split")
+
+		-- ╔═════════════╗
+		-- ║    Hints    ║
+		-- ╚═════════════╝
+		vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
+		-- vim.lsp.util.apply_text_edits(resolved_hint.textEdits, 0, client.encoding)
+		-- local location = resolved_hint.label[1].location
+		-- client:request('textDocument/hover', {
+		--   textDocument = { uri = location.uri },
+		--   position = location.range.start,
+		-- })
 
 		-- When LSP detaches: Clears the highlighting
 		vim.api.nvim_create_autocmd('LspDetach', {
