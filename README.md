@@ -4,7 +4,7 @@
 git clone https://github.com/Taloonys/dotfiles.git ~/dotfiles && cd ~/dotfiles
 sudo cmd /c mklink /d ~\AppData\local\nvim ~\dotfiles\nvim
 sudo cmd /c mklink ~\.gitconfig ~\dotfiles\.gitconfig
-sudo cmd /c mklink ~\.config\wezterm ~\dotfiles\wezterm
+sudo cmd /c mklink /d ~\.config\wezterm ~\dotfiles\wezterm
 ```
 
 # Notes
