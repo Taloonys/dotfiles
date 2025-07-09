@@ -1,9 +1,10 @@
 # Quickstart
+> There is a high chance, that you have to change `~` on or actual `C:/Users/<username>` path
 ```sh
 git clone https://github.com/Taloonys/dotfiles.git ~/dotfiles && cd ~/dotfiles
-cmd /c mklink /d ~\AppData\local\nvim ~\dotfiles\nvim
-cmd /c mklink ~\.gitconfig ~\dotfiles\.gitconfig
-cmd /c mklink ~\.config\wezterm\wezterm.lua ~\dotfiles\wezterm.lua
+sudo cmd /c mklink /d ~\AppData\local\nvim ~\dotfiles\nvim
+sudo cmd /c mklink ~\.gitconfig ~\dotfiles\.gitconfig
+sudo cmd /c mklink ~\.config\wezterm ~\dotfiles\wezterm
 ```
 
 # Notes
