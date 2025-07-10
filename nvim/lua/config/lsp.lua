@@ -13,14 +13,14 @@ vim.lsp.config('*', {
 	},
 })
 
-vim.diagnostic.config({
-	virtual_lines = true,
-	current_line = true,
-	underline = true,
-	update_in_insert = false,
-	severity_sort = true,
-	float = {
-		border = "rounded",
-		source = true,
-	},
-})
+-- vim.diagnostic.config({
+-- 	virtual_lines = true,
+-- 	current_line = true,
+-- 	underline = true,
+-- 	update_in_insert = false,
+-- 	severity_sort = true,
+-- 	float = {
+-- 		border = "rounded",
+-- 		source = true,
+-- 	},
+-- })

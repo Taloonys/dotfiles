@@ -1,10 +1,11 @@
 # Quickstart
-> There is a high chance, that you have to change `~` on or actual `C:/Users/<username>` path
+> There is a high chance, that you have to change `~` or actual `C:/Users/<username>` path
 ```sh
 git clone https://github.com/Taloonys/dotfiles.git ~/dotfiles && cd ~/dotfiles
 sudo cmd /c mklink /d ~\AppData\local\nvim ~\dotfiles\nvim
 sudo cmd /c mklink ~\.gitconfig ~\dotfiles\.gitconfig
-sudo cmd /c mklink ~\.config\wezterm ~\dotfiles\wezterm
+sudo cmd /c mklink /d ~\.config\wezterm ~\dotfiles\wezterm
+sudo cmd /c mklink ~\.config\starship.toml ~\dotfiles\starship.toml
 ```
 
 # Notes

@@ -1,88 +1,89 @@
 vim.api.nvim_create_autocmd('LspAttach', {
-	group = vim.api.nvim_create_augroup('my.lsp', {}),
-	callback = function(event)
-		local client = assert(vim.lsp.get_client_by_id(event.data.client_id))
+    group = vim.api.nvim_create_augroup('my.lsp', {}),
+    callback = function(event)
+        local client = assert(vim.lsp.get_client_by_id(event.data.client_id))
 
-		-- ╔═══════════════════════╗
-		-- ║    Auto-completion    ║
-		-- ╚═══════════════════════╝
-		if client:supports_method('textDocument/completion') then
-			-- show menu even for 1 option, don't select first option, open options in a bit different popup menu
-			vim.opt_local.completeopt = { 'menuone', 'noselect', 'noinsert', 'popup' }
-			vim.lsp.completion.enable(true, client.id, event.buf, {
-				-- auto show options
-				autotrigger = true,
-			})
-		end
+        -- ╔═══════════════════════╗
+        -- ║    Auto-completion    ║
+        -- ╚═══════════════════════╝
+        if client:supports_method('textDocument/completion') then
+            -- show menu even for 1 option, don't select first option, open options in a bit different popup menu
+            vim.opt_local.completeopt = { 'menuone', 'noselect', 'noinsert', 'popup' }
+            vim.lsp.completion.enable(true, client.id, event.buf, {
+                -- auto show options
+                autotrigger = true,
+            })
+        end
 
-		-- ╔════════════════════════════════════╗
-		-- ║    Auto-format ("lint") on save    ║
-		-- ╚════════════════════════════════════╝
-		if not client:supports_method('textDocument/willSaveWaitUntil')
-			and client:supports_method('textDocument/formatting') then
-			vim.api.nvim_create_autocmd('BufWritePre', {
-				group = vim.api.nvim_create_augroup('my.lsp', { clear = false }),
-				buffer = event.buf,
+        -- ╔════════════════════════════════════╗
+        -- ║    Auto-format ("lint") on save    ║
+        -- ╚════════════════════════════════════╝
+        if not client:supports_method('textDocument/willSaveWaitUntil')
+            and client:supports_method('textDocument/formatting') then
+            vim.api.nvim_create_autocmd('BufWritePre', {
+                group = vim.api.nvim_create_augroup('my.lsp', { clear = false }),
+                buffer = event.buf,
 
-				callback = function()
-					vim.lsp.buf.format({ bufnr = event.buf, id = client.id, timeout_ms = 1000 })
-				end,
-			})
-		end
+                callback = function()
+                    vim.lsp.buf.format({ bufnr = event.buf, id = client.id, timeout_ms = 1000 })
+                end,
+            })
+        end
 
-		-- ╔══════════════╗
-		-- ║    Keymaps   ║
-		-- ╚══════════════╝
-		local map = function(keys, func, desc)
-			vim.keymap.set("n", keys, func, { buffer = event.buf, desc = "LSP: " .. desc })
-		end
+        -- ╔══════════════╗
+        -- ║    Keymaps   ║
+        -- ╚══════════════╝
+        local map = function(keys, func, desc)
+            vim.keymap.set("n", keys, func, { buffer = event.buf, desc = "LSP: " .. desc })
+        end
 
-		map("gl", vim.diagnostic.open_float, "Open Diagnostic Float")
-		map("K", vim.lsp.buf.hover, "Hover Documentation")
-		map("gs", vim.lsp.buf.signature_help, "Signature Documentation")
-		map("gD", vim.lsp.buf.declaration, "Goto Declaration")
-		-- map("<leader>la", vim.lsp.buf.code_action, "Code Action") => using tiny-code-actions for this
-		map("<leader>lr", vim.lsp.buf.rename, "Rename all references")
-		map("<leader>lf", vim.lsp.buf.format, "Format")
-		map("<leader>v", "<cmd>vsplit | lua vim.lsp.buf.definition()<cr>", "Goto Definition in Vertical Split")
+        map("gl", vim.diagnostic.open_float, "Open Diagnostic Float")
+        map("K", vim.lsp.buf.hover, "Hover Documentation")
+        map("gs", vim.lsp.buf.signature_help, "Signature Documentation")
+        map("gd", vim.lsp.buf.definition, "Goto Definition")
+        map("gD", vim.lsp.buf.declaration, "Goto Declaration")
+        -- map("<leader>la", vim.lsp.buf.code_action, "Code Action") => using tiny-code-actions for this
+        map("<leader>lr", vim.lsp.buf.rename, "Rename all references")
+        map("<leader>lf", vim.lsp.buf.format, "Format")
+        map("<leader>v", "<cmd>vsplit | lua vim.lsp.buf.definition()<cr>", "Goto Definition in Vertical Split")
 
-		-- ╔═════════════╗
-		-- ║    Hints    ║
-		-- ╚═════════════╝
-		vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
-		-- vim.lsp.util.apply_text_edits(resolved_hint.textEdits, 0, client.encoding)
-		-- local location = resolved_hint.label[1].location
-		-- client:request('textDocument/hover', {
-		--   textDocument = { uri = location.uri },
-		--   position = location.range.start,
-		-- })
+        -- ╔═════════════╗
+        -- ║    Hints    ║
+        -- ╚═════════════╝
+        vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
+        -- vim.lsp.util.apply_text_edits(resolved_hint.textEdits, 0, client.encoding)
+        -- local location = resolved_hint.label[1].location
+        -- client:request('textDocument/hover', {
+        --   textDocument = { uri = location.uri },
+        --   position = location.range.start,
+        -- })
 
-		-- ╔══════════════════╗
-		-- ║    Highlights    ║
-		-- ╚══════════════════╝
-		-- When cursor stops moving: Highlights all instances of the symbol under the cursor
-		-- When cursor moves: Clears the highlighting
-		vim.api.nvim_create_autocmd({ 'CursorHold', 'CursorHoldI' }, {
-			buffer = event.buf,
-			group = highlight_augroup,
-			callback = vim.lsp.buf.document_highlight,
-		})
-		vim.api.nvim_create_autocmd({ 'CursorMoved', 'CursorMovedI' }, {
-			buffer = event.buf,
-			group = highlight_augroup,
-			callback = vim.lsp.buf.clear_references,
-		})
+        -- ╔══════════════════╗
+        -- ║    Highlights    ║
+        -- ╚══════════════════╝
+        -- When cursor stops moving: Highlights all instances of the symbol under the cursor
+        -- When cursor moves: Clears the highlighting
+        vim.api.nvim_create_autocmd({ 'CursorHold', 'CursorHoldI' }, {
+            buffer = event.buf,
+            group = highlight_augroup,
+            callback = vim.lsp.buf.document_highlight,
+        })
+        vim.api.nvim_create_autocmd({ 'CursorMoved', 'CursorMovedI' }, {
+            buffer = event.buf,
+            group = highlight_augroup,
+            callback = vim.lsp.buf.clear_references,
+        })
 
-		-- ╔═════════════════════╗
-		-- ║    Miscellaneous    ║
-		-- ╚═════════════════════╝
-		-- When LSP detaches: Clears the highlighting
-		vim.api.nvim_create_autocmd('LspDetach', {
-			group = vim.api.nvim_create_augroup('lsp-detach', { clear = true }),
-			callback = function(in_detach_event)
-				vim.lsp.buf.clear_references()
-				vim.api.nvim_clear_autocmds { group = 'lsp-highlight', buffer = in_detach_event.buf }
-			end,
-		})
-	end,
+        -- ╔═════════════════════╗
+        -- ║    Miscellaneous    ║
+        -- ╚═════════════════════╝
+        -- When LSP detaches: Clears the highlighting
+        vim.api.nvim_create_autocmd('LspDetach', {
+            group = vim.api.nvim_create_augroup('lsp-detach', { clear = true }),
+            callback = function(in_detach_event)
+                vim.lsp.buf.clear_references()
+                vim.api.nvim_clear_autocmds { group = 'lsp-highlight', buffer = in_detach_event.buf }
+            end,
+        })
+    end,
 })

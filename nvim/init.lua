@@ -5,18 +5,28 @@ require("keymap")
 -- Plugin Manager
 require("config.lazy")
 
--- Plugin-configs
-require("config.telescope")
-require("config.mason-lspconfig")
+-- Config domains
+require("config.parsers")
+require("config.terminal")
+require("config.searching")
+require("config.file-jumping")
+
+require("config.colors")
+require("config.statusline")
+
+require("config.messages")
+require("config.colors")
+require("config.file-explorer")
+require("config.jobs-management")
+require("config.animations")
+
+
 require("config.lsp")
 require("config.lsp-autocmds")
-require("config.treesitter")
-require("config.colors")
-require("config.toggleterm")
-require("config.harpoon")
-require("config.statusline")
-require("config.messages")
-require("config.file-explorer")
+require("config.lsp-auto-installer")
+
+-- C++ specific
+require("config.cpp-landscape.cmake")
 
 -- I hope to refactor to:
 -- require "config.lsp"
