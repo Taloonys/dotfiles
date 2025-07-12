@@ -1,8 +1,4 @@
 return {
-	'Civitasv/cmake-tools.nvim',
-	config = function()
-		require 'cmake-tools'.setup({
-		})
-	end,
-	opts = {},
+    'Civitasv/cmake-tools.nvim',
+    opts = {},
 }

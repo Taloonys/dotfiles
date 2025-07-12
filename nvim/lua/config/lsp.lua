@@ -1,16 +1,19 @@
 vim.lsp.enable({
-	"clangd",
-	"rust_analyzer",
+    "lua_ls",
+    "clangd",
+    "rust_analyzer",
+    "gopls",
+    "cmake-language-server",
 })
 
 vim.lsp.config('*', {
-	capabilities = {
-		textDocument = {
-			semanticTokens = {
-				multilineTokenSupport = true,
-			}
-		}
-	},
+    capabilities = {
+        textDocument = {
+            semanticTokens = {
+                multilineTokenSupport = true,
+            }
+        }
+    },
 })
 
 -- vim.diagnostic.config({

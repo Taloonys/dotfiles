@@ -1,39 +1,35 @@
 local neoscroll = require 'neoscroll'
-local neoscroll = require('neoscroll')
 
--- Настройки плагина (опционально)
 neoscroll.setup({
     easing_function = "quadratic", -- Плавность анимации
     respect_scrolloff = true,      -- Учитывать scrolloff при скроллинге:cite[4]
 })
 
--- Кастомные функции для скроллинга с центрированием
+-- scroll + center
 local function scroll_with_center(direction)
     return function()
-        -- Плавный скролл через neoscroll
         if direction == "up" then
-            neoscroll.scroll(-vim.wo.scroll, true, 250) -- Вверх
+            neoscroll.scroll(-vim.wo.scroll, true, 250)
         else
-            neoscroll.scroll(vim.wo.scroll, true, 250)  -- Вниз
+            neoscroll.scroll(vim.wo.scroll, true, 250)
         end
-        -- Центрирование через vim.cmd (после скролла)
+        -- eventual center screen
         vim.schedule(function()
             vim.cmd("normal! zz")
         end)
     end
 end
 
--- Поиск с центрированием (n/N)
+-- search (by n/N) + center
 local function search_with_center(forward)
     return function()
-        vim.cmd(forward and "normal! n" or "normal! N") -- Поиск
+        vim.cmd(forward and "normal! n" or "normal! N")
         vim.schedule(function()
-            vim.cmd("normal! zzzv")                     -- Центрирование + открытие фолда
+            vim.cmd("normal! zzzv")
         end)
     end
 end
 
--- Клавиши с плавным скроллом + центрированием
 local keymap = {
     -- Скролл с центрированием
     ["<C-u>"] = scroll_with_center("up"),
@@ -53,11 +49,8 @@ local keymap = {
     ["zb"]    = function() neoscroll.zb(250) end,
 }
 
--- Применяем для режимов: Normal, Visual, Select
+-- modes: Normal, Visual, Select
 local modes = { 'n', 'v', 'x' }
 for key, func in pairs(keymap) do
     vim.keymap.set(modes, key, func, { silent = true })
 end
-
-
-require 'tiny-glimmer'.setup()
