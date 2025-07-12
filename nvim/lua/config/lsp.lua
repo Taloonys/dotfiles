@@ -1,10 +1,10 @@
-vim.lsp.enable({
-    "lua_ls",
-    "clangd",
-    "rust_analyzer",
-    "gopls",
-    "cmake-language-server",
-})
+-- vim.lsp.enable({
+--     "lua_ls",
+--     "clangd",
+--     "rust_analyzer",
+--     "gopls",
+--     "cmake-language-server",
+-- })
 
 vim.lsp.config('*', {
     capabilities = {

@@ -11,7 +11,8 @@
 -- ║    General Keymaps    ║
 -- ╚═══════════════════════╝
 
-vim.g.Mapleader = " " -- <leader> is now whitespace
+-- btw `Mapleader` is not an error, but it wouldn't work...
+vim.g.mapleader = " " -- <leader> is now whitespace
 
 -- System buffer
 vim.keymap.set({ 'n', 'v' }, '<leader>sy', '"+y') -- selected
@@ -49,3 +50,6 @@ vim.keymap.set("n", "J", "mzJ`z") -- concatenate lines, BUT keeps cursor positio
 -- vim.keymap.set("n", "<C-u>", "<C-u>zz")    -- scroll up AND center cursor pos on screen
 -- vim.keymap.set("n", "n", "nzzzv")          -- find next occurence AND center cursor + open fold
 -- vim.keymap.set("n", "N", "Nzzzv")          -- find previous occurence AND center cursor + open fold
+
+-- Misellaneous
+vim.keymap.set("n", "<space><space>x", "<cmd>source %<CR>") -- sync new changes in config with current session
