@@ -20,8 +20,8 @@ vim.keymap.set({ 'n', 'v' }, '<leader>sY', '"+Y') -- whole line
 vim.keymap.set({ 'n', 'v' }, '<leader>sd', '"+d') -- selected
 vim.keymap.set({ 'n', 'v' }, '<leader>sD', '"+D') -- whole line
 
-vim.keymap.set('n', '<leader>sp', '"+p')        -- after cursor (Somehow it's slow*)
-vim.keymap.set('n', '<leader>sP', '"+P')        -- before cursor
+vim.keymap.set('n', '<leader>sp', '"+p')          -- after cursor (Somehow it's slow*)
+vim.keymap.set('n', '<leader>sP', '"+P')          -- before cursor
 
 -- (NOT RLY USEFUL) Split navigation
 -- vim.keymap.set("n", "<C-h>", "<C-w>h")

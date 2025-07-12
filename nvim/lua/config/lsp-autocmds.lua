@@ -42,21 +42,17 @@ vim.api.nvim_create_autocmd('LspAttach', {
         map("gs", vim.lsp.buf.signature_help, "Signature Documentation")
         map("gd", vim.lsp.buf.definition, "Goto Definition")
         map("gD", vim.lsp.buf.declaration, "Goto Declaration")
-        -- map("<leader>la", vim.lsp.buf.code_action, "Code Action") => using tiny-code-actions for this
         map("<leader>lr", vim.lsp.buf.rename, "Rename all references")
         map("<leader>lf", vim.lsp.buf.format, "Format")
         map("<leader>v", "<cmd>vsplit | lua vim.lsp.buf.definition()<cr>", "Goto Definition in Vertical Split")
+
+        local tiny_code_action = require "tiny-code-action"
+        vim.keymap.set({ "n", "x" }, "<leader>ca", tiny_code_action.code_action(), { noremap = true, silent = true })
 
         -- ╔═════════════╗
         -- ║    Hints    ║
         -- ╚═════════════╝
         vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
-        -- vim.lsp.util.apply_text_edits(resolved_hint.textEdits, 0, client.encoding)
-        -- local location = resolved_hint.label[1].location
-        -- client:request('textDocument/hover', {
-        --   textDocument = { uri = location.uri },
-        --   position = location.range.start,
-        -- })
 
         -- ╔══════════════════╗
         -- ║    Highlights    ║
