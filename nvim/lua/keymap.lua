@@ -1,12 +1,3 @@
---
--- function Map(mode, lhs, rhs, opts)
---     local options = { noremap = true, silent = true }      -- disable recursive Mappings + no feedback about command completion
---     if opts then
---         options = vim.tbl_extend("force", options, opts)   -- rewrite options if presented
---     end
---     vim.keymap.set(mode, lhs, rhs, options)
--- end
-
 -- ╔═══════════════════════╗
 -- ║    General Keymaps    ║
 -- ╚═══════════════════════╝
@@ -45,7 +36,7 @@ vim.keymap.set("v", ">", ">gv")              -- drag 1 tab right (and don't lose
 -- Basic stuff enchancements
 vim.keymap.set("n", "J", "mzJ`z") -- concatenate lines, BUT keeps cursor position
 
--- through neoscroll animation setup!
+-- replaced by neoscroll
 -- vim.keymap.set("n", "<C-d>", "<C-d>zz")    -- scroll down AND center cursor pos on screen
 -- vim.keymap.set("n", "<C-u>", "<C-u>zz")    -- scroll up AND center cursor pos on screen
 -- vim.keymap.set("n", "n", "nzzzv")          -- find next occurence AND center cursor + open fold

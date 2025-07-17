@@ -1,10 +1,10 @@
 local function open_win_config_func()
     local scr_w = vim.opt.columns:get()
     local scr_h = vim.opt.lines:get()
-    local tree_w = math.floor(scr_w / 2)
+    local tree_w = math.floor(vim.o.columns * 0.8) -- math.floor(scr_w / 2)
     local tree_h = math.floor(tree_w * scr_h / scr_w)
     return {
-        border = "double",
+        border = "rounded",
         relative = "editor",
         width = tree_w,
         height = tree_h,
@@ -15,6 +15,7 @@ end
 
 require("nvim-tree").setup {
     vim.keymap.set('n', '<leader>pv', ':NvimTreeToggle <CR>'),
+
     view = {
         signcolumn = "yes",
         float = {

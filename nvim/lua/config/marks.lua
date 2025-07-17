@@ -1,3 +1,11 @@
+-- ╔═══════════════════╗
+-- ║   File-related    ║
+-- ╚═══════════════════╝
+-- nothing, harpoon is prb enough
+
+-- ╔═══════════╗
+-- ║   Files   ║
+-- ╚═══════════╝
 local harpoon = require("harpoon")
 
 -- REQUIRED

@@ -22,4 +22,7 @@ require("noice").setup({
         inc_rename = false,
         lsp_doc_border = false,
     },
+    notify = {
+        view = "mini",
+    }
 })

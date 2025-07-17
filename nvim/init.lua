@@ -9,7 +9,7 @@ require("config.lazy")
 require("config.parsers")
 require("config.terminal")
 require("config.searching")
-require("config.file-jumping")
+require("config.marks")
 
 require("config.colors")
 require("config.statusline")
