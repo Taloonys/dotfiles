@@ -9,8 +9,10 @@ vim.lsp.config('*', {
     },
 })
 
+-- required by LuaSnip if friendly-snippes is used
 -- `nvim-cmp` === `cmp`
-require("luasnip.loaders.from_vscode").lazy_load() -- required by LuaSnip if friendly-snippes is used
+require("luasnip.loaders.from_vscode").lazy_load()
+require("luasnip.loaders.from_vscode").lazy_load({ paths = vim.fn.stdpath("config") .. "/snippets" })
 
 -- forward cmp capabilities for neovim completion to lsp's
 local lspconfig    = require "lspconfig"
