@@ -1,3 +1,0 @@
--- rustacenvim
--- dap for rust
--- *be carefull with tiny diagnostics

@@ -1,11 +1,15 @@
+--[[
+--Basicly, i use formatting from builtin stuff
+--]]
+
 vim.api.nvim_create_autocmd('LspAttach', {
     group = vim.api.nvim_create_augroup('my.lsp', {}),
     callback = function(event)
         local client = assert(vim.lsp.get_client_by_id(event.data.client_id))
 
-        -- ╔════════════════════════════════════╗
-        -- ║    Auto-format ("lint") on save    ║
-        -- ╚════════════════════════════════════╝
+        -- ╔═══════════════════════════╗
+        -- ║    Auto-format on save    ║
+        -- ╚═══════════════════════════╝
         if not client:supports_method('textDocument/willSaveWaitUntil')
             and client:supports_method('textDocument/formatting') then
             vim.api.nvim_create_autocmd('BufWritePre', {
