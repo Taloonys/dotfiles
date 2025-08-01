@@ -20,7 +20,7 @@ require("config.jobs-management")
 require("config.animations")
 
 require("config.lsp")
-require("config.lsp-autocmds")
+require("config.formatting")
 
 -- C++ specific
 require("config.cpp-landscape.cmake")
