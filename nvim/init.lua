@@ -21,7 +21,6 @@ require("config.animations")
 
 require("config.lsp")
 require("config.lsp-autocmds")
-require("config.lsp-auto-installer")
 
 -- C++ specific
 require("config.cpp-landscape.cmake")

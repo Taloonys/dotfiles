@@ -15,10 +15,24 @@ return {
     },
     {
         "mason-org/mason-lspconfig.nvim",
-        opts = {},
+        opts = {
+            -- If sth is failed to install -> run :Mason
+            ensure_installed = {
+                "lua_ls",        -- lua
+                "pyright",       -- python
+                "rust_analyzer", -- rust
+                "clangd",        -- C / C++
+                "neocmakelsp",   -- cmake
+                "marksman",      -- markdown
+                "lemminx",       -- xml
+                "docker-compose-language-service",
+                "dockerfile-language-server",
+            },
+            automatic_enable = false,
+        },
         dependencies = {
             { "mason-org/mason.nvim", opts = {} },
-            "neovim/nvim-lspconfig",
+            -- requires nvim-lspconfig to load first!!!
         },
     }
 }

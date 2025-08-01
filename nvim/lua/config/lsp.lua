@@ -1,14 +1,3 @@
--- basic lsp stuff, prb would be deleted
-vim.lsp.config('*', {
-    capabilities = {
-        textDocument = {
-            semanticTokens = {
-                multilineTokenSupport = true,
-            }
-        }
-    },
-})
-
 -- required by LuaSnip if friendly-snippes is used
 -- `nvim-cmp` === `cmp`
 require("luasnip.loaders.from_vscode").lazy_load()
@@ -23,6 +12,8 @@ lspconfig.gopls.setup { capabilites = capabilities }
 lspconfig.clangd.setup { capabilites = capabilities }
 lspconfig.neocmakelsp.setup { capabilites = capabilities }
 lspconfig.rust_analyzer.setup { capabilites = capabilities } -- could be replaced by rustaceanvim
+lspconfig.docker_compose_language_service.setup { capabilites = capabilities }
+lspconfig.dockerfile_language_server.setup { capabilites = capabilities }
 
 
 -- sources for autocompletion & snippets

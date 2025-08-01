@@ -1,3 +1,4 @@
+---@diagnostic disable: missing-fields
 require 'nvim-treesitter.configs'.setup {
     -- A list of parser names, or "all" (the listed parsers MUST always be installed)
     -- * Well, it will install this parsers *
@@ -45,8 +46,7 @@ require 'nvim-treesitter.configs'.setup {
     },
 }
 
--- local ts_context = require 'treesitter-context'
-vim.keymap.set('n', '<leader>vc', ":TSContext toggle<CR>")
 
-require("ibl").setup() -- call is required
-vim.keymap.set('n', '<leader>vi', ":IBLToggle<CR>")
+require("ibl").setup({ enabled = false, }) -- call is required
+vim.keymap.set('n', '<leader>cv', ":TSContext toggle<CR>")
+vim.keymap.set('n', '<leader>iv', ":IBLToggle<CR>")
