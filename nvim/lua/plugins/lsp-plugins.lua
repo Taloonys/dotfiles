@@ -14,6 +14,7 @@ return {
 	{
 		"mason-org/mason-lspconfig.nvim",
 		opts = {
+			-- prb required nodejs & npm
 			ensure_installed = {
 				"lua_ls",
 				"pyright",
@@ -37,12 +38,21 @@ return {
 		},
 		opts = {
 			ensure_installed = {
+				-- formatters
 				"gofumpt",
 				"prettier",
 				"black",
 				"rustfmt",
 				"clang-format",
 				"stylua",
+				-- linters
+				"pylint",
+				"cpplint",
+				"eslint_d",
+				"cpplint",
+				"cmakelint",
+				"hadolint",
+				"bacon",
 			},
 			automatic_installation = true,
 		},

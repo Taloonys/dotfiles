@@ -21,6 +21,7 @@ require("config.animations")
 
 require("config.lsp")
 require("config.formatting")
+require("config.linting")
 
 -- C++ specific
 require("config.cpp-landscape.cmake")
