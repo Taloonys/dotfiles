@@ -17,5 +17,5 @@ sudo cmd /c mklink ~\.config\starship.toml ~\dotfiles\starship.toml
 git pull --recurse-submodules
 
 # if pulled without, then init submodules content in repo
-git submodule --init
+git submodule update --init
 ```
