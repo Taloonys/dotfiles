@@ -10,3 +10,12 @@ sudo cmd /c mklink ~\.config\starship.toml ~\dotfiles\starship.toml
 
 # Notes
 * This branch is more experimental, also ok for linux, but currently used for C++ based working env on **Windows**
+
+# Remind for submodules
+```sh
+# pull with submodules
+git pull --recurse-submodules
+
+# if pulled without, then init submodules content in repo
+git submodule --init
+```
