@@ -1,5 +1,6 @@
 [user]
-  name = Taloonys
+  name = name
+  email = idk@gmail.com
 [core]
   editor = nvim
   autocrlf = false
