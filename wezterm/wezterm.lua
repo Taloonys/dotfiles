@@ -5,8 +5,8 @@ if wezterm.config_builder then
     config = wezterm.config_builder()
 end
 
--- config.default_prog = { 'nu' }
-config.default_prog = { 'powershell.exe' }
+config.default_prog = { 'nu' }
+-- config.default_prog = { 'powershell.exe' }
 -- config.shell_integration.osc133 = true
 
 -- Font settings
@@ -36,7 +36,7 @@ config.max_fps = 240
 
 -- tmux
 -- config.disable_default_key_bindings = true
-config.leader = { key = "a", mods = "CTRL", timeout_milliseconds = 2000 }
+config.leader = { key = "Space", mods = "CTRL", timeout_milliseconds = 2000 }
 config.keys = {
     { mods = "LEADER", key = "c",          action = wezterm.action.SpawnTab "CurrentPaneDomain", },
     { mods = "LEADER", key = "x",          action = wezterm.action.CloseCurrentPane { confirm = true } },
