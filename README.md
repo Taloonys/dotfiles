@@ -20,9 +20,7 @@ ln -svf ~/dotfiles/starship.toml ~/.config/starship.toml
 * install a rest of stuff
 ```sh
 sudo apt-get install -y nvim fish tmux
-```
-* *(possible) if old linux -> install `homebrew`, cuz we need nvim>=0.11*
-```sh
+# or/and (if nvim in apt is <= 0.11)
 brew install neovim
 ```
 * copy template for gitconfig + fill ur credentails
@@ -38,4 +36,37 @@ git pull --recurse-submodules
 
 # if pulled without, then init submodules content in repo
 git submodule update --init
+```
+
+# Uninstall 
+* symlinks and repo
+```sh
+# drop any dir/file if it's a symlink
+for path in ~/.config/fish ~/.config/nvim ~/.config/tmux ~/.config/starship.toml; do
+  if [ -L "$path" ]; then
+    echo "Removing symlink: $path"
+    rm -f "$path"
+  else
+    echo "Skipping $path (not a symlink)"
+  fi
+done
+
+# drom tpm plugins manager
+rm -rf ~/.tmux/plugins/tpm
+
+# self distruction
+rm -rf ~/dotfiles
+```
+* packages
+    * but i exlcuded basic packages
+```sh
+sudo apt-get autoremove -y
+sudo apt-get autoclean -y
+sudo apt-get remove --purge -y golang-go rustc cargo python3 python3-venv delve lazygit nodejs 
+```
+* core stuff
+```sh
+sudo apt-get remove fish tmux nvim
+# or/and
+brew remove neovim
 ```
