@@ -1,3 +1,9 @@
+# Pre-requirements
+* brewhome (if old linux distro - built-in package manager could not be enough)
+* insane mental state
+* be ready to do everything step by step
+* be ready for a lot of stuff installed...
+
 # Quickstart
 > We are placing `dotfiles` into `~`
 * clone repo
@@ -7,7 +13,7 @@ git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm # tmux plugins
 ```
 * setup basic stuff
 ```sh
-sudo apt-get install -y unzip golang-go rustc cargo python3 python-venv delve zip lazygit ripgrep nodejs
+brew install unzip golang-go rustc cargo python3 python-venv delve zip lazydocker lazygit ripgrep nodejs
 ```
 * create softlinks
     * it must be done before installing main tools
@@ -19,9 +25,7 @@ ln -svf ~/dotfiles/starship.toml ~/.config/starship.toml
 ```
 * install a rest of stuff
 ```sh
-sudo apt-get install -y nvim fish tmux
-# or/and (if nvim in apt is <= 0.11)
-brew install neovim
+brew install -y nvim fish tmux neovim
 ```
 * copy template for gitconfig + fill ur credentails
 ```sh
@@ -60,13 +64,5 @@ rm -rf ~/dotfiles
 * packages
     * but i exlcuded basic packages
 ```sh
-sudo apt-get autoremove -y
-sudo apt-get autoclean -y
-sudo apt-get remove --purge -y golang-go rustc cargo python3 python3-venv delve lazygit nodejs 
-```
-* core stuff
-```sh
-sudo apt-get remove fish tmux nvim
-# or/and
-brew remove neovim
+brew remove --purge -y golang-go rustc cargo python3 python3-venv delve lazygit lazydocker nodejs remove fish tmux neovim
 ```
