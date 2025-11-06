@@ -43,4 +43,4 @@ if not set -q TMUX
 end
 
 # fish colors
-fish_config theme apply cyberdream
+fish_config theme choose cyberdream
