@@ -1,5 +1,5 @@
-#
 # template targets to substitute
-#
-
 .gitconfig
+
+# Specific dirs
+tmux/plugins/
