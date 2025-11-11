@@ -13,14 +13,17 @@ function sudo --description "Replacement for Bash 'sudo !!' command to run last 
 end
 
 # aliases
-alias l='eza --color=always --color-scale=all --color-scale-mode=gradient --icons=always --group-directories-first'
+alias l='eza --color=always --color-scale=all --color-scale-mode=gradient --icons=always --group-directories-first -1'
 alias ll='eza --color=always --color-scale=all --color-scale-mode=gradient --icons=always --group-directories-first -l --git -h'
 alias la='eza --color=always --color-scale=all --color-scale-mode=gradient --icons=always --group-directories-first -a'
 alias lt "eza --color=always --color-scale=all --color-scale-mode=gradient --icons=always --group-directories-first --tree --level=2"
 alias lla='eza --color=always --color-scale=all --color-scale-mode=gradient --icons=always --group-directories-first -a -l --git -h'
 
-alias cfg_fish "nvim ~/.config/fish/config.fish"
-alias cfg_tmux "nvim ~/.config/tmux/tmux.conf"
+alias cfg_fish "nvim ~/.config/fish"
+alias cfg_tmux "nvim ~/.config/tmux"
+alias cfg_nvim "nvim ~/.config/nvim"
+
+alias vi "nvim"
 
 # main third-party packet manager
 # newer nvim is also there
