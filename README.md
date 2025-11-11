@@ -1,8 +1,21 @@
 # Pre-requirements
 * brewhome (if old linux distro - built-in package manager could not be enough)
-* insane mental state
-* be ready to do everything step by step
-* be ready for a lot of stuff installed...
+* insane mental stuff
+
+# Requirements
+* zoxide -> https://github.com/ajeetdsouza/zoxide
+```sh
+curl -sSfL https://raw.githubusercontent.com/ajeetdsouza/zoxide/main/install.sh | sh
+```
+* eza -> https://github.com/eza-community/eza
+```sh
+brew install eza
+```
+* starship -> https://starship.rs/
+```sh
+curl -sS https://starship.rs/install.sh | sh
+```
+* nvim, fish, tmux would be mentioned later
 
 # Quickstart
 > We are placing `dotfiles` into `~`
@@ -18,14 +31,14 @@ brew install unzip golang-go rustc cargo python3 python-venv delve zip lazydocke
 * create softlinks
     * it must be done before installing main tools
 ```sh
-ln -svf ~/dotfiles/fish ~/.config/fish
-ln -svf ~/dotfiles/nvim ~/.config/nvim
-ln -svf ~/dotfiles/tmux ~/.config/tmux
-ln -svf ~/dotfiles/starship.toml ~/.config/starship.toml
+rm -rf ~/.config/fish && ln -svf ~/dotfiles/fish ~/.config/fish
+rm -rf ~/.config/nvim && ln -svf ~/dotfiles/nvim ~/.config/nvim
+rm -rf ~/.config/tmux && ln -svf ~/dotfiles/tmux ~/.config/tmux
+rm -rf ~/.config/tmux && ln -svf ~/dotfiles/starship.toml ~/.config/starship.toml
 ```
 * install a rest of stuff
 ```sh
-brew install -y nvim fish tmux neovim
+brew install -y fish tmux neovim
 ```
 * copy template for gitconfig + fill ur credentails
 ```sh

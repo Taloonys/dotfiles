@@ -1,3 +1,6 @@
+# specific files
+fish/env.fish
+
 # template targets to substitute
 .gitconfig
 

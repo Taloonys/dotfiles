@@ -13,11 +13,8 @@ function sudo --description "Replacement for Bash 'sudo !!' command to run last 
 end
 
 # aliases
-alias l='eza --color=always --color-scale=all --color-scale-mode=gradient --icons=always --group-directories-first -1'
-alias ll='eza --color=always --color-scale=all --color-scale-mode=gradient --icons=always --group-directories-first -l --git -h'
-alias la='eza --color=always --color-scale=all --color-scale-mode=gradient --icons=always --group-directories-first -a'
 alias lt "eza --color=always --color-scale=all --color-scale-mode=gradient --icons=always --group-directories-first --tree --level=2"
-alias lla='eza --color=always --color-scale=all --color-scale-mode=gradient --icons=always --group-directories-first -a -l --git -h'
+alias lla 'eza --color=always --color-scale=all --color-scale-mode=gradient --icons=always --group-directories-first -a -l --git -h'
 
 alias cfg_fish "nvim ~/.config/fish"
 alias cfg_tmux "nvim ~/.config/tmux"
@@ -47,3 +44,6 @@ end
 
 # fish colors
 fish_config theme choose cyberdream
+
+# local user-defined Env
+source ~/.config/fish/env.fish
