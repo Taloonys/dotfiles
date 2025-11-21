@@ -12,19 +12,19 @@ function sudo --description "Replacement for Bash 'sudo !!' command to run last 
     end
 end
 
-# aliases
-alias lt "eza --color=always --color-scale=all --color-scale-mode=gradient --icons=always --group-directories-first --tree --level=2"
-alias lla 'eza --color=always --color-scale=all --color-scale-mode=gradient --icons=always --group-directories-first -a -l --git -h'
-
-alias cfg_fish "nvim ~/.config/fish"
-alias cfg_tmux "nvim ~/.config/tmux"
-alias cfg_nvim "nvim ~/.config/nvim"
-
-alias vi "nvim"
-
 # main third-party packet manager
 # newer nvim is also there
 set -p PATH "/home/linuxbrew/.linuxbrew/bin"
+
+#
+# aliases
+#
+
+source ~/.config/fish/aliases.fish
+
+#
+# Other
+#
 
 # smart cd -> zoxide
 zoxide init fish | source
@@ -41,6 +41,7 @@ if not set -q TMUX
     tmux new-session -s main
   end
 end
+
 
 # fish colors
 fish_config theme choose cyberdream
