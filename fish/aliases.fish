@@ -75,119 +75,44 @@ alias dcd 'docker compose down'
 alias dcb 'docker compose build'
 alias dclogs 'docker compose logs -f'
 
-#
-# !!! highly experimental by ChatGPT =) !!!
-#
-
-# --- colorful bat ---
-function v
+# Open first found by zoxide dir using nvim
+function viz
     if test (count $argv) -eq 0
-        echo "Usage: v <filename>"
+        echo "Usage: viz <dir-name>"
         return 1
     end
-    bat --paging=always --style=plain --color=always $argv
-end
 
-# fzf to nvim
-function ff
-    set file (fd --type f --hidden --exclude .git | fzf \
-        --height=80% --border \
-        --preview 'bat --color=always --style=numbers --line-range=:300 {}' \
-        --preview-window=right:70%)
-    if test -n "$file"
-        nvim $file
-    end
-end
+    set -l target (zoxide query $argv[1] 2>/dev/null)
 
-# search + jump to path -> ???
-function fcd
-    set dir (fd --type d --hidden --exclude .git | fzf --height=80% --border)
-    if test -n "$dir"
-        cd $dir
-    end
-end
-
-# search file + open preview -> ???
-function fshow
-    set file (fd --type f --hidden --exclude .git | fzf \
-        --preview 'bat --color=always --style=numbers --line-range=:200 {}' \
-        --preview-window=right:70%)
-    if test -n "$file"
-        bat --paging=always --style=numbers $file
-    end
-end
-
-# fast log check by fzf
-function flog
-    set file (fd --type f --hidden --exclude .git -e log | fzf \
-        --preview 'tail -n 100 {}' --preview-window=down:60%)
-    if test -n "$file"
-        echo "📜 Tail: $file"
-        tail -f $file
-    end
-end
-
-# rg + fzf
-function fgrep
-    if test (count $argv) -eq 0
-        echo "Usage: fgrep <pattern>"
+    if test -z "$target"
+        echo "No match found for: $argv[1]"
         return 1
     end
-    rg --color=always --line-number --no-heading --hidden --smart-case $argv | \
-    fzf --ansi --preview 'bat --style=numbers --color=always --highlight-line {2} {1}' \
-        --delimiter ':' --nth 3.. \
-        --bind 'enter:execute(nvim {1} +{2})'
+
+    nvim "$target"
 end
 
-alias ffv='ff'      # Find & open file (vim)
-alias fcd='fcd'     # Find & cd
-alias fshow='fshow' # Find & show
-alias flog='flog'   # Tail logs
-alias fgrep='fgrep' # Search in files
-
-alias t100='tail -n 100'
-alias tf='tail -f'
-
-# + zoxide
-
-# zoxide + fzf
-function fz
-    set dir (zoxide query -l | fzf --height=80% --border --prompt="📁 Jump to: ")
-    if test -n "$dir"
-        cd $dir
+# Open fzf for desired file/dir with preview + open it in nvim
+function vif
+    if test (count $argv) -eq 0
+        echo "Usage: vif <pattern>"
+        return 1
     end
-end
 
-# find file in zoxide-searched-project
-function fzf_in_zoxide
-    set dir (zoxide query -l | fzf --height=80% --border --prompt="📂 Choose project: ")
-    if test -n "$dir"
-        cd $dir
-        echo "📍 Entered: $dir"
-        set file (fd --type f --hidden --exclude .git | fzf \
-            --preview 'bat --color=always --style=numbers --line-range=:300 {}' \
-            --preview-window=right:70%)
-        if test -n "$file"
-            nvim $file
-        end
+    set -l query $argv[1]
+
+    # fzf: files + preview + patter-pre-filter
+    set -l file (
+        fd --type f --hidden --exclude .git | \
+        fzf --query "$query" \
+            --preview 'bat --style=numbers --color=always --line-range=:500 {}' \
+            --height=80% \
+            --border
+    )
+
+    if test -z "$file"
+        return
     end
-end
 
-# open project through zoxide in nvim
-function fp
-    set dir (zoxide query -l | fzf --height=80% --border --prompt="📂 Select project: ")
-    if test -n "$dir"
-        echo "🧭 Opening project: $dir"
-        cd $dir
-        nvim .
-    end
+    nvim "$file"
 end
-
-# fzf open project & after -> open file inside
-function fzfproj
-    fzf_in_zoxide
-end
-
-alias fz='fz'
-alias fp='fp'
-alias fzfproj='fzfproj'
