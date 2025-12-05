@@ -1,29 +1,16 @@
-# Pre-requirements
-
-- brewhome (if old linux distro - built-in package manager could not be enough)
-- insane mental stuff
-
 # Requirements
 
-- zoxide -> https://github.com/ajeetdsouza/zoxide
-
-```sh
-curl -sSfL https://raw.githubusercontent.com/ajeetdsouza/zoxide/main/install.sh | sh
-```
-
-- basic linux shell decorations: eza, fz, bat, rg
-
-```sh
-brew install eza fd bat rg
-```
-
+- brewhome (if old linux distro - built-in package manager could not be enough)
 - starship -> https://starship.rs/
 
 ```sh
+# prb sth like this
 curl -sS https://starship.rs/install.sh | sh
 ```
 
-- nvim, fish, tmux would be mentioned later
+- insane mental stuff
+
+- NerdFonts (I used FiraCode)
 
 # Quickstart
 
@@ -36,10 +23,31 @@ git clone https://github.com/Taloonys/dotfiles.git ~/dotfiles && cd ~/dotfiles
 git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm # tmux plugins manager
 ```
 
-- setup basic stuff
+- setup basic utils, example for ubuntu24.04 (as most commonly used)
 
 ```sh
-brew install unzip golang-go rustc cargo python3 python-venv delve zip lazydocker lazygit ripgrep nodejs
+brew install eza fd bat rg \
+     unzip golang-go rustc cargo python3 python-venv delve zip nodejs \
+     lazydocker lazygit \
+     nvim fish tmux
+```
+
+> full list is sth like this, but it could be different for different versions and package managers and so on...
+
+```
+eza
+fd
+bat
+rg
+unzip
+rust cargo
+python3
+zip
+lazygit
+lazydocker
+tmux
+nvim
+fish
 ```
 
 - create softlinks
@@ -52,17 +60,14 @@ rm -rf ~/.config/tmux && ln -svf ~/dotfiles/tmux ~/.config/tmux
 rm -rf ~/.config/tmux && ln -svf ~/dotfiles/starship.toml ~/.config/starship.toml
 ```
 
-- install a rest of stuff
-
-```sh
-brew install -y fish tmux neovim
-```
-
 - copy template for gitconfig + fill ur credentails
 
 ```sh
-cp ~/dotfiles/.gitconfig.in ~/.gitconfig # and change there ur info <-> cuz it's pure template
+cp ~/dotfiles/.gitconfig.in ~/.gitconfig
+# !!! and change there ur info <-> cuz it's pure template
 ```
+
+- **while in terminal with tmux -> press `<leader>i`**, currently for tmux it's `Space+Ctrl`
 
 - ~~suffer~~ enjoy
 
