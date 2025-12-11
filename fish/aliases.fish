@@ -1,24 +1,41 @@
 #
-# aliases
+# sudo last command
+#
+
+function sudo --description "Replacement for Bash 'sudo !!' command to run last command using sudo."
+    if test "$argv" = !!
+        echo sudo $history[1]
+        eval command sudo $history[1]
+    else
+        command sudo $argv
+    end
+end
+
+#
+# Better ls
 #
 
 alias l 'eza --color=always --color-scale=all --color-scale-mode=gradient --icons=always --group-directories-first'
-alias l1 'eza --color=always --color-scale=all --color-scale-mode=gradient --icons=always --group-directories-first -1'
-alias lt "eza --color=always --color-scale=all --color-scale-mode=gradient --icons=always --group-directories-first --tree --level=2"
-alias lla 'eza --color=always --color-scale=all --color-scale-mode=gradient --icons=always --group-directories-first -a -l --git -h'
+alias l1 'eza --color=always --color-scale=all --color-scale-mode=gradient --icons=always --group-directories-first -1 -a'
+alias lt "eza --color=always --color-scale=all --color-scale-mode=gradient --icons=always --group-directories-first --tree --level=2 -a"
+alias ll 'eza --color=always --color-scale=all --color-scale-mode=gradient --icons=always --group-directories-first -a -l --git -h'
 
-# Alias for fuzzy finding files with fd and previewing with bat
-alias ffp 'fd --type f --hidden --exclude .git | fzf --preview "bat --color=always --style=numbers --line-range=:500 {}"'
+#
+# Faster config access
+#
 
 alias rld_fish "source ~/.config/fish/config.fish"
 
-alias cfg_fish "nvim ~/.config/fish"
-alias cfg_tmux "nvim ~/.config/tmux"
-alias cfg_nvim "nvim ~/.config/nvim"
+alias cfg_fish "$EDITOR ~/.config/fish"
+alias cfg_tmux "$EDITOR ~/.config/tmux"
+alias cfg_nvim "$EDITOR ~/.config/nvim"
 
 alias vi "nvim"
 
+#
 # Systemctl
+#
+
 alias sc 'systemctl'
 alias scs 'sudo systemctl start'
 alias sce 'sudo systemctl enable'
@@ -36,7 +53,10 @@ function sclogs
     sudo journalctl -u $argv[1] -n 50 --no-pager
 end
 
+#
 # Docker
+#
+
 alias d 'docker'
 alias dps 'docker ps'
 alias dpa 'docker ps -a'
@@ -75,6 +95,13 @@ alias dcd 'docker compose down'
 alias dcb 'docker compose build'
 alias dclogs 'docker compose logs -f'
 
+#
+# Better navigation
+#
+
+# Alias for fuzzy finding files with fd and previewing with bat
+alias ffp '$EDITOR (fd --type f --hidden --exclude .git | fzf --preview "bat --color=always --style=numbers --line-range=:500 {}")'
+
 # Open first found by zoxide dir using nvim
 function viz
     if test (count $argv) -eq 0
@@ -89,21 +116,27 @@ function viz
         return 1
     end
 
-    nvim "$target"
+    $EDITOR "$target"
 end
 
-# Open fzf for desired file/dir with preview + open it in nvim
+
+# Viz but with fzf-like preview for selecting
 function vif
-    if test (count $argv) -eq 0
-        echo "Usage: vif <pattern>"
+    if test (count $argv) -ne 2
+        echo "Usage: vif <pattern> <search-root>"
         return 1
     end
 
     set -l query $argv[1]
+    set -l root $argv[2]
 
-    # fzf: files + preview + patter-pre-filter
+    if not test -d "$root"
+        echo "Search root is not a directory: $root"
+        return 1
+    end
+
     set -l file (
-        fd --type f --hidden --exclude .git | \
+        fd --type f --hidden --exclude .git . "$root" | \
         fzf --query "$query" \
             --preview 'bat --style=numbers --color=always --line-range=:500 {}' \
             --height=80% \
@@ -114,5 +147,5 @@ function vif
         return
     end
 
-    nvim "$file"
+    $EDITOR "$file"
 end
