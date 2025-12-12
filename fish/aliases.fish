@@ -31,6 +31,8 @@ alias cfg_tmux "$EDITOR ~/.config/tmux"
 alias cfg_nvim "$EDITOR ~/.config/nvim"
 
 alias vi "nvim"
+alias lg "lazygit"
+alias ld "lazydocker"
 
 #
 # Systemctl
@@ -148,4 +150,71 @@ function vif
     end
 
     $EDITOR "$file"
+end
+
+
+# Open fzf for file + zoxide to it's directory
+function ffz
+    if test (count $argv) -lt 1
+        echo "Usage: ffz <pattern>"
+        return 1
+    end
+
+    set -l query $argv[1]
+
+    # fzf search with pattern
+    set -l file (
+        fd --type f --hidden --exclude .git . | \
+        fzf --query "$query" \
+            --preview 'bat --style=numbers --color=always --line-range=:500 {}' \
+            --height=80% \
+            --border
+    )
+
+    if test -z "$file"
+        return
+    end
+
+    # get parent dir of file
+    set -l dir (dirname "$file")
+
+    # cd there
+    z "$dir"
+end
+
+
+# Open fzf search on pattern (string inside file), and open selection in editor
+# It's kinda buggy and some files preview are not valid
+function vigs
+    if test (count $argv) -eq 0
+        echo "Usage: vigs <pattern>"
+        return 1
+    end
+
+    set pattern $argv[1]
+
+    # rg search
+    set files (rg --files-with-matches --no-messages -- "$pattern" | sort -u)
+
+    if test (count $files) -eq 0
+        echo "No matches found."
+        return 1
+    end
+
+    # preview selection
+    set selection (printf "%s\n" $files | fzf \
+        --multi \
+        --preview "
+            set lines (rg -n --no-heading --color=never -- '$pattern' {} | cut -d: -f1 | string join ',')
+            if test -n \"\$lines\"
+                bat --style=numbers --color=always --highlight-line \"\$lines\" {}
+            else
+                bat --style=numbers --color=always {}
+            end
+        " \
+        --preview-window=right:60%)
+
+    if test -n "$selection"
+        $EDITOR $selection
+    end
 end
