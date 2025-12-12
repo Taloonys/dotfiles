@@ -124,13 +124,20 @@ end
 
 # Viz but with fzf-like preview for selecting
 function vif
-    if test (count $argv) -ne 2
-        echo "Usage: vif <pattern> <search-root>"
+    if test (count $argv) -lt 1
+        echo "Usage: vif <pattern> [search-root]"
         return 1
     end
 
     set -l query $argv[1]
-    set -l root $argv[2]
+
+    # By default cwd is used
+    set -l root (pwd)
+
+    # If search root is specified - use it
+    if test (count $argv) -ge 2
+        set root $argv[2]
+    end
 
     if not test -d "$root"
         echo "Search root is not a directory: $root"
@@ -151,6 +158,7 @@ function vif
 
     $EDITOR "$file"
 end
+
 
 
 # Open fzf for file + zoxide to it's directory
