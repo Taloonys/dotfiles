@@ -1,5 +1,3 @@
-# ==========Short and concise=========
-
 format = """
 [╭](bold overlay1)$os$username\
 $directory\
@@ -7,45 +5,13 @@ $git_branch\
 $git_status\
 $git_commit\
 $time\
-\n$character \
+\n$character\
+$conda\
+$python\
+$poetry\
 """
 
-# ==============Expanded==============
-
-# format = """
-# [╭](bold overlay1)$os$username\
-# $directory\
-# $git_branch\
-# $git_status\
-# $git_commit\
-# $nodejs\
-# $python\
-# $rust\
-# $golang\
-# $java\
-# $php\
-# $docker_context\
-# $terraform\
-# $lua\
-# $cpp\
-# $kotlin\
-# $gleam\
-# $javascript\
-# $typescript\
-# $ruby\
-# $zig\
-# $haskell\
-# $elixir\
-# $clojure\
-# $deno\
-# $bun\
-# $dotnet\
-# $scala\
-# $time\
-# \n$character \
-# """
-
-# ====================================
+# =============Visauls================
 
 palette = 'cyberdream'
 
@@ -130,137 +96,17 @@ format = """
 success_symbol = '[](fg:text bold)'
 error_symbol   = '[](fg:red bold)'
 
-# ====================================
-#
-# To be honest this is too overhead and useless
-#
-# ====================================
-
-[nodejs]
-disabled = false
-symbol = ""
-format = '( | [$symbol $version](fg:color_green))'
+# =======Programs environments========
 
 [python]
 disabled = false
 symbol = ""
-format = '( | [$symbol $version](fg:color_yellow))'
+format = '([$symbol $virtualenv](fg:color_yellow)) > '
 
-[rust]
+[conda]
 disabled = false
-symbol = ""
-format = '( | [$symbol $version](fg:color_red))'
+format = '([$symbol $environment](fg:color_green)) > '
 
-[golang]
+[poetry]
 disabled = false
-symbol = ""
-format = '( | [$symbol $version](fg:color_blue))'
-
-[java]
-disabled = false
-symbol = ""
-format = '( | [$symbol $version](fg:color_orange))'
-
-[php]
-disabled = false
-symbol = ""
-format = '( | [$symbol $version](fg:color_aqua))'
-
-[docker_context]
-disabled = false
-symbol = ""
-format = '( | [$symbol $context](fg:color_blue))'
-
-[terraform]
-disabled = false
-symbol = ""
-format = '( | [$symbol $version](fg:color_aqua))'
-
-[lua]
-disabled = false
-symbol = ""
-format = '( | [$symbol $version](fg:color_blue))'
-
-[cpp]
-disabled = false
-symbol = ""
-detect_files = ["CMakeLists.txt", "Makefile"]
-format = '( | [$symbol](fg:color_blue))'
-
-[kotlin]
-disabled = false
-symbol = ""
-detect_files = ["build.gradle", "build.gradle.kts"]
-format = '( | [$symbol](fg:color_purple))'
-
-[gleam]
-disabled = false
-symbol = ""
-detect_files = ["gleam.toml"]
-format = '( | [$symbol](fg:color_green))'
-
-[javascript]
-disabled = false
-symbol = ""
-detect_files = ["package.json"]
-format = '( | [$symbol](fg:color_yellow))'
-
-[typescript]
-disabled = false
-symbol = ""
-detect_files = ["tsconfig.json", "package.json"]
-format = '( | [$symbol](fg:color_blue))'
-
-[ruby]
-disabled = false
-symbol = ""
-detect_files = ["Gemfile"]
-format = '( | [$symbol](fg:color_red))'
-
-[zig]
-disabled = false
-symbol = ""
-detect_files = ["build.zig"]
-format = '( | [$symbol](fg:color_yellow))'
-
-[haskell]
-disabled = false
-symbol = ""
-detect_files = ["stack.yaml", "*.cabal"]
-format = '( | [$symbol](fg:color_pink))'
-
-[elixir]
-disabled = false
-symbol = ""
-detect_files = ["mix.exs"]
-format = '( | [$symbol](fg:color_purple))'
-
-[clojure]
-disabled = false
-symbol = ""
-detect_files = ["project.clj", "deps.edn"]
-format = '( | [$symbol](fg:color_green))'
-
-[deno]
-disabled = false
-symbol = ""
-detect_files = ["deno.json", "deno.jsonc"]
-format = '( | [$symbol](fg:color_blue))'
-
-[bun]
-disabled = false
-symbol = ""
-detect_files = ["bun.lockb"]
-format = '( | [$symbol](fg:color_pink))'
-
-[dotnet]
-disabled = false
-symbol = ""
-detect_extensions = ["csproj", "fsproj"]
-format = '( | [$symbol](fg:color_blue))'
-
-[scala]
-disabled = false
-symbol = ""
-detect_files = ["build.sbt"]
-format = '( | [$symbol](fg:color_red))'
+format = '( | [ $virtualenv](fg:color_yellow)) > '
