@@ -8,7 +8,6 @@ $time\
 \n$character\
 $conda\
 $python\
-$poetry\
 """
 
 # =============Visauls================
@@ -106,7 +105,3 @@ format = '([$symbol $virtualenv](fg:color_yellow)) > '
 [conda]
 disabled = false
 format = '([$symbol $environment](fg:color_green)) > '
-
-[poetry]
-disabled = false
-format = '( | [ $virtualenv](fg:color_yellow)) > '
