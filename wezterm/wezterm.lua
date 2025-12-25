@@ -5,9 +5,11 @@ if wezterm.config_builder then
     config = wezterm.config_builder()
 end
 
-config.default_prog = { 'nu' }
+config.default_prog = { 'powershell.exe' }
 config.colors = require("cyberdream")
--- config.color_scheme = "Nord (Gogh)"
+
+-- prevent wezterm to use it's own ssh-mechanics (cringe)
+config.mux_enable_ssh_agent = false
 
 config.window_close_confirmation = "NeverPrompt"
 
