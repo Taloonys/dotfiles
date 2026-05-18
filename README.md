@@ -5,8 +5,8 @@
 * Wezterm
 * Starship
 * nvim
-* Zed
 * yazi
+* Zed (OPTIONAL, just a transparent experiment.. just use nvim)
 
 # Quickstart
 > There is a high chance that you have to swap '~' with your actual 'C:/Users/<name>' -> do only absolute ways
@@ -19,8 +19,9 @@ cp ./gitconfig.in ~/.gitconfig # + change your info
 cmd /c mklink /d "%USERPROFILE%\AppData\Local\nvim" "%USERPROFILE%\dotfiles\nvim"
 cmd /c mklink /d "%USERPROFILE%\.config\wezterm" "%USERPROFILE%\dotfiles\wezterm"
 cmd /c mklink "%USERPROFILE%\.config\starship.toml" "%USERPROFILE%\dotfiles\starship.toml"
-cmd /c mklink /d "%APPDATA%\Zed" "%USERPROFILE%\dotfiles\zed"
 cmd /c mklink /d "%APPDATA%\yazi" "%USERPROFILE%\dotfiles\yazi"
+
+cmd /c mklink /d "%APPDATA%\Zed" "%USERPROFILE%\dotfiles\zed"
 ```
 
 # Remind for submodules
