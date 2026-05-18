@@ -6,6 +6,7 @@
 * Starship
 * nvim
 * Zed
+* yazi
 
 # Quickstart
 > There is a high chance that you have to swap '~' with your actual 'C:/Users/<name>' -> do only absolute ways
@@ -19,6 +20,7 @@ cmd /c mklink /d "%USERPROFILE%\AppData\Local\nvim" "%USERPROFILE%\dotfiles\nvim
 cmd /c mklink /d "%USERPROFILE%\.config\wezterm" "%USERPROFILE%\dotfiles\wezterm"
 cmd /c mklink "%USERPROFILE%\.config\starship.toml" "%USERPROFILE%\dotfiles\starship.toml"
 cmd /c mklink /d "%APPDATA%\Zed" "%USERPROFILE%\dotfiles\zed"
+cmd /c mklink /d "%APPDATA%\yazi" "%USERPROFILE%\dotfiles\yazi"
 ```
 
 # Remind for submodules
