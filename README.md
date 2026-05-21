@@ -23,42 +23,34 @@ git clone https://github.com/Taloonys/dotfiles.git ~/dotfiles && cd ~/dotfiles
 git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm # tmux plugins manager
 ```
 
-- setup basic utils, example for ubuntu24.04 (as most commonly used)
+- **BE AWARE** - scripts would delete current configs for according tools
+  - and `~/.gitconfig`\*
 
-```sh
-brew install eza fd bat rg \
-     unzip golang-go rustc cargo python3 python-venv delve zip nodejs \
-     lazydocker lazygit \
-     nvim fish tmux
-```
+- use one of presented scripts
+  - `bootstrap-brew.sh` - basic install through brew
+  - `bootstrap-brew-bundle.sh` - TODO - as script above but with `brew bundle`
+  - OR do `brew bundle` (works for `BrewFile`) - TODO - brew manifest, but some must do on your own
+- _(Optional)_ for plantuml preview it also require `graphviz`, but it... prb you wouldn't even care
 
-> full list is sth like this, but it could be different for different versions and package managers and so on...
+> fzf must be heavily above v0.60 otherwise sth won't work inside yazi. `brew` usually has on of the newest versions
 
-```
-eza
-fd
-bat
-rg
-unzip
-rust cargo
-python3
-zip
-lazygit
-lazydocker
-tmux
-nvim
-fish
-```
+- **while in terminal with tmux -> press `<leader>i`**, currently for tmux it's `Space+Ctrl`
 
-- create softlinks
-  - it must be done before installing main tools
+- ~~suffer~~ enjoy
+
+## BTW
+
+> It's already in scripts, but commands inside for softlinks are:
 
 ```sh
 rm -rf ~/.config/fish && ln -svf ~/dotfiles/fish ~/.config/fish
 rm -rf ~/.config/nvim && ln -svf ~/dotfiles/nvim ~/.config/nvim
 rm -rf ~/.config/tmux && ln -svf ~/dotfiles/tmux ~/.config/tmux
+rm -rf ~/.config/yazi && ln -svf ~/dotfiles/yazi ~/.config/yazi
 rm -rf ~/.config/tmux && ln -svf ~/dotfiles/starship.toml ~/.config/starship.toml
 ```
+
+## Gitconfig
 
 - copy template for gitconfig + fill ur credentails
 
@@ -66,10 +58,6 @@ rm -rf ~/.config/tmux && ln -svf ~/dotfiles/starship.toml ~/.config/starship.tom
 cp ~/dotfiles/.gitconfig.in ~/.gitconfig
 # !!! and change there ur info <-> cuz it's pure template
 ```
-
-- **while in terminal with tmux -> press `<leader>i`**, currently for tmux it's `Space+Ctrl`
-
-- ~~suffer~~ enjoy
 
 # Remind for submodules
 
@@ -79,33 +67,4 @@ git pull --recurse-submodules
 
 # if pulled without, then init submodules content in repo
 git submodule update --init
-```
-
-# Uninstall
-
-- symlinks and repo
-
-```sh
-# drop any dir/file if it's a symlink
-for path in ~/.config/fish ~/.config/nvim ~/.config/tmux ~/.config/starship.toml; do
-  if [ -L "$path" ]; then
-    echo "Removing symlink: $path"
-    rm -f "$path"
-  else
-    echo "Skipping $path (not a symlink)"
-  fi
-done
-
-# drom tpm plugins manager
-rm -rf ~/.tmux/plugins/tpm
-
-# self distruction
-rm -rf ~/dotfiles
-```
-
-- packages
-  - but i exlcuded basic packages
-
-```sh
-brew remove --purge -y golang-go rustc cargo python3 python3-venv delve lazygit lazydocker nodejs remove fish tmux neovim
 ```

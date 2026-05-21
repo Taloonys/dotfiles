@@ -1,0 +1,2 @@
+- must add even empty `env.fish` here
+- highly recommended to config any place specific stuff in `env.fish`

@@ -6,6 +6,9 @@ end
 # newer nvim is also there
 set -p PATH "/home/linuxbrew/.linuxbrew/bin"
 
+# nvim as default editor for system
+set -gx EDITOR nvim
+
 # prepared variables
 source ~/.config/fish/variables.fish
 
