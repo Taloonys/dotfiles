@@ -24,15 +24,22 @@ alias ll 'eza --color=always --color-scale=all --color-scale-mode=gradient --ico
 # Faster config access
 #
 
-alias rld_fish "source ~/.config/fish/config.fish"
+alias rld-fish "source ~/.config/fish/config.fish"
 
-alias cfg_fish "$EDITOR ~/.config/fish"
-alias cfg_tmux "$EDITOR ~/.config/tmux"
-alias cfg_nvim "$EDITOR ~/.config/nvim"
+alias cfg-fish "$EDITOR ~/.config/fish"
+alias cfg-tmux "$EDITOR ~/.config/tmux"
+alias cfg-nvim "$EDITOR ~/.config/nvim"
 
 alias vi "nvim"
+alias vih "nvim ."
 alias lg "lazygit"
 alias ld "lazydocker"
+
+#
+# Utility
+#
+
+alias bat-last "bat (ls -t | head -n 1)"
 
 #
 # Systemctl
@@ -43,9 +50,9 @@ alias scs 'sudo systemctl start'
 alias sce 'sudo systemctl enable'
 alias scd 'sudo systemctl disable'
 alias scr 'sudo systemctl restart'
-alias scst 'systemctl status'
+alias scstat 'systemctl status'
 alias scj 'journalctl -u'
-alias scdr 'sudo systemctl daemon-reload'
+alias sc-dreload 'sudo systemctl daemon-reload'
 
 function sclogs
     if test (count $argv) -lt 1
@@ -64,13 +71,13 @@ alias dps 'docker ps'
 alias dpa 'docker ps -a'
 alias di 'docker images'
 alias dlogs 'docker logs -f'
-alias dex 'docker exec -it'
+alias dexec 'docker exec -it'
 alias dstop 'docker stop $(docker ps -a -q)'
 alias drm 'docker rm $(docker ps -a -q)'
-alias drmf 'docker stop $(docker ps -a -q) && docker rm $(docker ps -a -q)'
+alias drmrf 'docker stop $(docker ps -a -q) && docker rm $(docker ps -a -q)'
 alias dclean 'docker container prune -f'
 alias dcleanall 'docker system prune -f'
-alias dri 'docker rmi $(docker images -q)'
+alias drmi 'docker rmi $(docker images -q)'
 alias dbuild 'docker build -t'
 
 function dex
@@ -102,10 +109,10 @@ alias dclogs 'docker compose logs -f'
 #
 
 # Alias for fuzzy finding files with fd and previewing with bat
-alias ffp '$EDITOR (fd --type f --hidden --exclude .git | fzf --preview "bat --color=always --style=numbers --line-range=:500 {}")'
+alias fzf-file '$EDITOR (fd --type f --hidden --exclude .git | fzf --preview "bat --color=always --style=numbers --line-range=:500 {}")'
 
-# Open first found by zoxide dir using nvim
-function viz
+
+function viz --description "`viz project` => enter vim for first match of zoxide (through fzf) with name `project`"
     if test (count $argv) -eq 0
         echo "Usage: viz <dir-name>"
         return 1
@@ -122,8 +129,7 @@ function viz
 end
 
 
-# Viz but with fzf-like preview for selecting
-function vif
+function vif --description "find file through fzf and open it in vim"
     if test (count $argv) -lt 1
         echo "Usage: vif <pattern> [search-root]"
         return 1
@@ -161,10 +167,9 @@ end
 
 
 
-# Open fzf for file + zoxide to it's directory
-function ffz
+function fz --description "Find file and z-into his directory. Like `fd` but `find` + `z`"
     if test (count $argv) -lt 1
-        echo "Usage: ffz <pattern>"
+        echo "Usage: fzf-file-dir <file-pattern>"
         return 1
     end
 
@@ -191,41 +196,39 @@ function ffz
 end
 
 
-# Open fzf search on pattern (string inside file), and open selection in editor
-# It's kinda buggy and some files preview are not valid
-function vigs
-    if test (count $argv) -eq 0
-        echo "Usage: vigs <pattern>"
-        return 1
-    end
+function find-dir --description "Поиск вложенных папок по полному пути и переход через zoxide"
+    set -l query "$argv"
 
-    set pattern $argv[1]
+    set -l dir (
+        fd --type d --full-path --hidden --follow --exclude .git | \
+        fzf --query "$query" \
+            --preview 'eza --tree --level=2 --color=always --icons {}' \
+            --height=80% \
+            --border
+    )
 
-    # rg search
-    set files (rg --files-with-matches --no-messages -- "$pattern" | sort -u)
-
-    if test (count $files) -eq 0
-        echo "No matches found."
-        return 1
-    end
-
-    # preview selection
-    set selection (printf "%s\n" $files | fzf \
-        --multi \
-        --preview "
-            set lines (rg -n --no-heading --color=never -- '$pattern' {} | cut -d: -f1 | string join ',')
-            if test -n \"\$lines\"
-                bat --style=numbers --color=always --highlight-line \"\$lines\" {}
-            else
-                bat --style=numbers --color=always {}
-            end
-        " \
-        --preview-window=right:60%)
-
-    if test -n "$selection"
-        $EDITOR $selection
+    if test -n "$dir"
+        z "$dir"
     end
 end
+
+
+function full-fname --description "Поиск файла и возврат его полного пути"
+    set -l query "$argv"
+
+    set -l file (
+        fd --type f --full-path --hidden --follow --exclude .git | \
+        fzf --query "$query" \
+            --preview 'bat --style=numbers --color=always --line-range=:500 {}' \
+            --height=80% \
+            --border
+    )
+
+    if test -n "$file"
+        realpath "$file"
+    end
+end
+
 
 
 # modified yazi through `y` 
